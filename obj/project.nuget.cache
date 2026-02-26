@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "Jq6vsMG7Yu8=",
+  "success": true,
+  "projectFilePath": "/Users/pallavipraveen/Documents/Level-3/week-1/Day-4/blogapi/blogapi.csproj",
+  "expectedPackageFiles": [
+    "/Users/pallavipraveen/.nuget/packages/microsoft.aspnetcore.openapi/9.0.9/microsoft.aspnetcore.openapi.9.0.9.nupkg.sha512",
+    "/Users/pallavipraveen/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Access to the path '/Users/pallavipraveen/.local/share/NuGet/http-cache/670c1461c29885f9aa22c281d8b7da90845b38e4$ps:_api.nuget.org_v3_index.json/vuln_index.dat-new' is denied.",
+      "projectPath": "/Users/pallavipraveen/Documents/Level-3/week-1/Day-4/blogapi/blogapi.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/pallavipraveen/Documents/Level-3/week-1/Day-4/blogapi/blogapi.csproj",
+      "targetGraphs": []
+    }
+  ]
+}
