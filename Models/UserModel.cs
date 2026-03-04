@@ -9,7 +9,7 @@ namespace blogapi.Models
     {
         public int Id { get; set; }
         public string? Username { get; set; }
-        public string ?  salt { get; set; }
+        public string ?  Salt { get; set; }
         public string ?  Hash { get; set; }
     }
 }
