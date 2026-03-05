@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using blogapi.Models;
 using blogapi.Models.DTO;
 using blogapi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -24,5 +25,29 @@ namespace blogapi.Controllers
         {
             return _data.AddUser(UserToAdd);
         }
+//GetAllUsers
+[HttpGet("GetAllUsers")]
+public IEnumerable<UserModel>GetAllUsers()
+        {
+            return _data.GetAllUsers();
+
+
+        }
+// GetUserByUserName
+[HttpGet("GetUserByUsername")]
+public UserIdDTO GetUserDTOUserName(string username)
+        {
+            return _data.GetUserIdDTOByUserName(username);
+        }
+
+
+
+//Login Endpoint
+[HttpPost("Login")]
+public IActionResult Login ([FromBody] LoginDTO User)
+        {
+            return _data.Login(User);
+        }
+
     }
 }

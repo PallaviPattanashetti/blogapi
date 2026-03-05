@@ -1,16 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using blogapi.Models;
 using blogapi.Models.DTO;
 using blogapi.Services.Context;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace blogapi.Services
 {
-    public class UserService
+    public class UserService : ControllerBase
     {
         private readonly DataContext _context;
 
@@ -28,6 +34,7 @@ namespace blogapi.Services
         public bool AddUser(CreateAccountDTO userToAdd)
         {
             bool result = false;
+
             if (userToAdd.Username != null && !DoesUserExist(userToAdd.Username))
             {
                 UserModel newUser = new UserModel();
@@ -92,8 +99,47 @@ namespace blogapi.Services
 
         }
 
+        public IEnumerable<UserModel> GetAllUsers()
+        {
+            return _context.UserInfo;
+        }
 
+        public IActionResult Login(LoginDTO user)
+        {
+            IActionResult result = Unauthorized();
+            //If the user exists
+            if (DoesUserExist(user.Username))
+            {
 
+                //create a secret key used to sign JTW toke
+                //stored securely (not hard core)
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersupersuperduppersecurekey@34456789"));
+                //Create signing credential using secret key and HMACSHA256 algorithm
+                var signinCredential = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);//This ensure the toke can't be tampred with
+                //build the JWT toke with metadata
 
+                var tokenOptions = new JwtSecurityToken(
+
+                    issuer: "http://localhost5001",
+                   audience: "http://localhost5001",
+                   claims: new List<Claim>(),
+                   expires: DateTime.Now.AddMinutes(5),
+                   signingCredentials: signinCredential
+
+                );
+                // convert the token object into string that can be sent to the client
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+                //return token as JSON to the client
+                result = Ok(new { Token = tokenString });
+            }
+            //return either the token (if user exist)or Unauthorized (if user does not exist)
+            return result;
+        }
+
+        public UserIdDTO GetUserIdDTOByUserName(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

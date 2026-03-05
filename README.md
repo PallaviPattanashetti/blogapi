@@ -127,6 +127,11 @@ string Password
 string Salt
 string Hash
 
+
+## UserIdDTO
+int userId
+string PublisherName
+
 ````
 
 ======Services=========
