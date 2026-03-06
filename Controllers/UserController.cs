@@ -25,28 +25,43 @@ namespace blogapi.Controllers
         {
             return _data.AddUser(UserToAdd);
         }
-//GetAllUsers
-[HttpGet("GetAllUsers")]
-public IEnumerable<UserModel>GetAllUsers()
+        //GetAllUsers
+        [HttpGet("GetAllUsers")]
+        public IEnumerable<UserModel> GetAllUsers()
         {
             return _data.GetAllUsers();
 
 
         }
-// GetUserByUserName
-[HttpGet("GetUserByUsername")]
-public UserIdDTO GetUserDTOUserName(string username)
+        // GetUserByUserName
+        [HttpGet("GetUserByUsername")]
+        public UserIdDTO GetUserDTOUserName(string username)
         {
             return _data.GetUserIdDTOByUserName(username);
         }
 
 
 
-//Login Endpoint
-[HttpPost("Login")]
-public IActionResult Login ([FromBody] LoginDTO User)
+        //Login Endpoint
+        [HttpPost("Login")]
+        public IActionResult Login([FromBody] LoginDTO User)
         {
             return _data.Login(User);
+        }
+
+
+
+        //Delete User
+        [HttpPost("DeleteUser/{userToDelete}")]
+        public bool DeleteUser(string userToDelete)
+        {
+            return _data.DeleteUser(userToDelete);
+        }
+
+        //UpdateUser
+        public bool UpdateUesr(int id, string username)
+        {
+            return _data.UpdateUser(id,username);
         }
 
     }
